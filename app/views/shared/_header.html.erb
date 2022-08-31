@@ -1,0 +1,6 @@
+<div class="text-right p-5 bg-gradient-to-t w-full">
+  <%= link_to "Group", root_path, class:"px-4" %>
+  <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class:"px-4" do %>
+    Signout<i class="px-2 fa-solid fa-arrow-right-from-bracket"></i>
+  <% end %>
+</div>

@@ -1,0 +1,21 @@
+<% @groups.each do | group | %>
+  <div class="w-full rounded px-4 py-4 my-4 bg-gray-200 flex">
+    <div class="w-full">
+      <% if group.member?(current_user) || group.owner?(current_user) %>
+        <%= link_to group_path(group) do %>
+          <h2 class="capitalize"><%= group.name %></h2>
+        <% end %>
+      <% else %>
+        <h2 class="capitalize"><%= group.name %></h2>
+      <% end %>
+      <h4>
+        <span class="mr-2"><%= group.group_members.size %> members</span>
+        <span class="mr-2"><%= group.posts.size %> Posts</span>
+        <span class="mr-2">Last activity <%= time_ago_in_words group.updated_at %></span>
+      </h4>
+    </div>
+    <div class="">
+      <%= link_to "Join", group_join_member_path(group), class: "btn btn-primary" unless (group.member?(current_user) || group.owner?(current_user)) %>
+    </div>
+  </div>
+<% end %>

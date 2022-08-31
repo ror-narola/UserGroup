@@ -1,0 +1,35 @@
+<div class="p-5 flex">
+  <div class="w-5/6 card">
+    <h2 class="text-primary mb-3">
+      <%= @group.name %>
+      <% if @group.owner == current_user %>
+        <%= link_to edit_group_path(@group), remote: true, data: { controller: "group", action: "ajax:success->group#form_load", title:"Edit Group"} do %>
+          <i class="fa-solid fa-gear px-2"></i>
+        <% end %>
+      <% end %>
+    </h2>
+    <%= render "posts/form" %>
+  </div>
+  <div class="w-1/6 card">
+    <h2 class="mb-2 text-primary font-semibold">Members</h2>
+    <% @group.group_members.each do | group_member | %>
+      <div class="flex">
+        <div class="w-4/5">
+          <h3 class="capitalize"><%= group_member.member.user_name %></h3>
+        </div>
+        <% if @group.owner?(current_user) %>
+          <div class="w-1/5">
+            <%= link_to group_remove_member_path(group_id: @group.id, member_id: group_member.member.id), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class:"text-danger mr-2" do %>
+              <i class="fa-solid fa-xmark"></i>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="px-7">
+  <h3 class="mb-2 ml-2">All Post</h3>
+  <%= render "posts/post_list" %>
+  <%= render "posts/form" %>
+</div>

@@ -1,0 +1,6 @@
+<%= form_for [@group, @post, @comment] do | form | %>
+  <%= form.text_area(:content, placeholder:"Write your comment....", class: "form-control", local:true )%>
+  <%= form.hidden_field(:post_id) %>
+  <%= form.hidden_field(:reply_of_id) %>
+  <%= form.submit "Save", class:"btn btn-primary" %>
+<% end %>

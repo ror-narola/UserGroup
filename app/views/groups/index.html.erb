@@ -1,0 +1,18 @@
+<div class="p-5">
+  <h3>Groups</h3>
+  <div class="py-2">
+    <div class="">
+      <div class="inline-flex rounded-md shadow-sm">
+        <%= link_to "All groups", groups_path(section: "all_groups"), class: "btn-group #{@section == "all_groups" ? "active" : ""}" %>
+        <%= link_to "Created by me", groups_path(section: "created_by_me"), class: "btn-group #{@section == "created_by_me" ? "active" : ""}" %>
+        <%= link_to "Where i am member", groups_path(section:"member_group"), class: "btn-group #{@section == "member_group" ? "active" : ""}" %>
+      </div>
+      <%= link_to new_group_path, remote: true, data: { controller: "group", action: "ajax:success->group#form_load", title:"Create Group"}  do %>
+        <button type="button" class="btn btn-primary float-right" name="button">Create New Group</button>
+      <% end %>
+    </div>
+    <div class="container">
+      <%= render "group_list" %>
+    </div>
+  </div>
+</div>

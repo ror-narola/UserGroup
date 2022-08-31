@@ -1,0 +1,12 @@
+<div class="p-5">
+  <div class="card">
+    <h3 class="mb-2 capitalize text-primary"><%= @post.title %></h3>
+    <hr class="text-white" />
+    <p><%= @post.content %></p>
+  </div>
+  <div class="card">
+    <h3 class="mb-2 capitalize text-primary">Comments</h3>
+    <%= render "comments/comments_list", comments: @comments %>
+    <%= render "comments/form" %>
+  </div>
+</div>

@@ -1,0 +1,4 @@
+<%= form_for @group do | form | %>
+  <%= form.text_field(:name, placeholder:"Enter name", class: "form-control", local:true )%>
+  <%= form.submit "#{@group.new_record? ? "Create" : "Update"} group", class:"btn btn-primary" %>
+<% end %>
