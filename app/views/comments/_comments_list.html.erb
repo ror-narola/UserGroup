@@ -3,8 +3,10 @@
     <p><%= comment.content %></p>
     <p class="text-gray-700">
       <span class="mr-2"><%= " #{comment.user ==current_user ? "You" : comment.user.user_name} #{comment.reply_of_id.nil? ? "commented" : "replied"} #{time_ago_in_words(comment.created_at)} ago" %></span>
-      <span data-controller="comment" data-cid="<%= comment.id %>"><%= link_to "Edit", edit_group_post_comment_path(@group, @post, comment), class:"mr-2", remote: true, data: { action: "ajax:success->comment#form_load", cid: comment.id} %></span>
-      <span><%= link_to "Delete", group_post_comment_path(@group, @post, comment), data: {method: :delete, turbo_confirm: 'Are you sure?'}, class:"text-danger mr-2"  %></span>
+      <% if comment.user ==current_user || @post.user == current_user || @post.group.owner == current_user %>
+        <span data-controller="comment" data-cid="<%= comment.id %>"><%= link_to "Edit", edit_group_post_comment_path(@group, @post, comment), class:"mr-2", remote: true, data: { action: "ajax:success->comment#form_load", cid: comment.id} %></span>
+        <span><%= link_to "Delete", group_post_comment_path(@group, @post, comment), data: {method: :delete, turbo_confirm: 'Are you sure?'}, class:"text-danger mr-2"  %></span>
+      <% end %>
       <span data-controller="comment" data-cid="<%= comment.id %>"> <%= link_to "Reply", group_post_comment_reply_path(@group, @post, comment), remote: true, data: { action: "ajax:success->comment#form_load", cid: comment.id} %>
         <div class="" id="form_comment_<%= comment.id %>">
         </div>
