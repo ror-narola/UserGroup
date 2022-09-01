@@ -2,14 +2,20 @@
   <div class="card">
     <h4 class="mb-1 text-primary font-semibold capitalize	">
       <%= link_to group_post_path(@group, post) do %>
-        <%= post.title %>
+        <i class="fa-solid fa-rss"></i>&nbsp; <%= post.title %>
       <% end %>
     </h4>
     <p class="mb-1 truncate"><%= post.content %></p>
-    <span data-controller="post" data-cid="<%= post.id %>"><%= link_to "Edit", edit_group_post_path(@group, post), class:"mr-2", remote: true, data: { action: "ajax:success->post#form_load", cid: post.id} %></span>
-    <%= link_to "Delete", group_post_path(@group, post), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class:"text-danger mr-2" %>
+    <span>
+      <%= post.comments.count > 0 ? "Last comment #{time_ago_in_words(post.comments.order(created_at: :desc).first.created_at)}.  " :"" %>
+    </span>
+    <% if post.user == current_user || post.group.owner == current_user %>
+      <span data-controller="post" data-cid="<%= post.id %>"><%= link_to "Edit", edit_group_post_path(@group, post), class:"mr-2", remote: true, data: { action: "ajax:success->post#form_load", cid: post.id} %></span>
+      <%= link_to "Delete", group_post_path(@group, post), data: {method: :delete, confirm: 'Are you sure?'}, class:"text-danger mr-2" %>
+    <% end %>
     <span>Created by <%= post.user_id == current_user.id ? "you" : post.user.user_name %> </span>
     <div class="" id="form_post_<%= post.id %>">
     </div>
+    <%= link_to "View post ->", group_post_path(@group, post), class:"mp-1" %>
   </div>
 <% end %>

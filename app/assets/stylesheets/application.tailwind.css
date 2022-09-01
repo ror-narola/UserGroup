@@ -27,6 +27,12 @@
   a:hover {
     @apply underline;
   }
+  label{
+    @apply font-normal leading-loose;
+  }
+  hr{
+    @apply border-blue-500 mt-4 mb-4;
+  }
 }
 
 

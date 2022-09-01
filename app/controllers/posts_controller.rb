@@ -29,7 +29,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    if @post.user == current_user && @post.delete
+    if @post.user == current_user && @post.destroy
       flash[:notice] = "Post deleted successfully"
       redirect_to group_path(@post.group)
     end
