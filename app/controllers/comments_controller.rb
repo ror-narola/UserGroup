@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    if (@comment.user == current_user || @comment.post.user == current_user) && @comment.delete
+    if (@comment.user == current_user || @comment.post.user == current_user) && @comment.destroy
       flash[:notice] = "Comment deleted successfully"
     end
     redirect_to group_post_path(@group, @comment.post)

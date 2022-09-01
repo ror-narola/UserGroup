@@ -3,10 +3,10 @@
     <div class="w-full">
       <% if group.member?(current_user) || group.owner?(current_user) %>
         <%= link_to group_path(group) do %>
-          <h2 class="capitalize"><%= group.name %></h2>
+          <h2 class="capitalize"><i class="fa fa-users"></i>&nbsp; <%= group.name %></h2>
         <% end %>
       <% else %>
-        <h2 class="capitalize"><%= group.name %></h2>
+        <h2 class="capitalize"><i class="fa fa-users"></i>&nbsp;<%= group.name %></h2>
       <% end %>
       <h4>
         <span class="mr-2"><%= group.group_members.size %> members</span>

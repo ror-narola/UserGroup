@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :find_group, only: [:show, :edit, :update, :join]
+  before_action :find_group, only: [:show, :edit, :update, :join, :destroy]
 
   def index
     @section = params && params[:section].present? ? params[:section] : "all_groups"
@@ -40,6 +40,13 @@ class GroupsController < ApplicationController
     if @group.update(group_params)
       flash[:notice] = "Group created successfully"
       redirect_to group_path(@group)
+    end
+  end
+
+  def destroy
+    if @group.destroy
+      flash[:notice] = "Group deleted successfully"
+      redirect_to root_path
     end
   end
 
